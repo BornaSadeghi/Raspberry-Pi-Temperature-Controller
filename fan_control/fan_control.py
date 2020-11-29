@@ -8,6 +8,7 @@ cpu = CPUTemperature()
 
 fan_on = False
 
+# Temperature at which the fan is turned on
 TEMPERATURE_THRESHOLD = 68
 # Waiting time before turning fan off when temperature is low enough
 FAN_OFF_DELAY = 10
