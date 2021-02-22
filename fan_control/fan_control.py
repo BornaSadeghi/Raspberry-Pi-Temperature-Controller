@@ -13,13 +13,13 @@ fan_on = False
 # Temperature at which the fan is turned on
 TEMPERATURE_THRESHOLD = 68
 # Time between temperature checks when fan is off
-FAN_OFF_DELAY = 10
+FAN_OFF_DELAY = 20
 # Time between temperature checks when fan is on
 FAN_ON_DELAY = 5
 
 # Plot temperature over time
-x_data = [0]
-y_data = [cpu.temperature]
+x_data = []
+y_data = []
 start_time = time()
 lowest_temperature = 1000
 highest_temperature = 0
@@ -53,27 +53,28 @@ def fan_off():
 
 def update_data():
     global lowest_temperature, highest_temperature
+    cputemp = cpu.temperature
     x_data.append(time()-start_time)
-    y_data.append(cpu.temperature)
+    y_data.append(cputemp)
 
     if len(x_data) > MAX_ENTRIES:
         del x_data[0]
         del y_data[0]
 
-    lowest_temperature = min(cpu.temperature, lowest_temperature)
-    highest_temperature = max(cpu.temperature, highest_temperature)
-    print("Time: {} s, CPU Temperature: {} °C".format(x_data[-1], cpu.temperature))
+    lowest_temperature = min(cputemp, lowest_temperature)
+    highest_temperature = max(cputemp, highest_temperature)
+    print("Time: {} s, CPU Temperature: {} °C".format(x_data[-1], cputemp))
 
 def update_chart():
     ax.clear()
-
+    plt.tight_layout()
     plt.title("CPU Temperature (°C) over Time (s)")
     plt.ylabel("CPU Temperature (°C)")
     plt.xlabel("Time (s)")
-    plt.tight_layout()
+
     
     plt.ylim(lowest_temperature-Y_PADDING, highest_temperature+Y_PADDING)
-    ax.plot(x_data, y_data, 'r')
+    ax.plot(x_data, y_data, 'o-r')
     figure.canvas.draw()
     plt.pause(0.01)
     
