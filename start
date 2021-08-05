@@ -1,1 +1,1 @@
-python3 ~/Raspberry-Pi-Temperature-Controller/fan_control/fan_control.py
+python3 ./fan_control/fan_control.py
