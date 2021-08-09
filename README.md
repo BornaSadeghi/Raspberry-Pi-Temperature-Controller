@@ -12,4 +12,4 @@ Ensure that you have pip, and the required packages:
 
 `sudo apt install python3-pip && pip3 install gpiozero matplotlib`
 
-![](https://github.com/BornaSadeghi/Raspberry-Pi-Temperature-Controller/blob/main/fancontrol.jpg?raw=true)
+![GUI Interface](https://user-images.githubusercontent.com/49890121/128725132-3bb944ba-423f-42a2-94e9-c7d636ae2bb2.png)
