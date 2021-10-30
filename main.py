@@ -17,17 +17,14 @@ parser.add_argument('--headless', dest='headless', action='store_true', help="En
 parser.set_defaults(headless=False, threshold=68)
 args = parser.parse_args()
 
-if args.headless:
-    headless = True
-
 def activate_fan():
-    if fan.value == 0:
+    if not fan.value:
         print("Fan is on")
         fan.on()
     sleep(FAN_ON_DELAY)
 
 def deactivate_fan():
-    if fan.value == 1:
+    if fan.value:
         print("Fan is off")
         fan.off()
     sleep(FAN_OFF_DELAY)
