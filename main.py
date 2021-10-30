@@ -13,7 +13,8 @@ except Exception:
 import argparse
 parser = argparse.ArgumentParser(description='Process fan controller options')
 parser.add_argument('--threshold', type=float, help="Fan activation temperature threshold")
-parser.add_argument('--headless', type=bool, help="Enable headless mode")
+parser.add_argument('--headless', dest='headless', action='store_true', help="Enable headless mode")
+parser.set_defaults(headless=False)
 args = parser.parse_args()
 
 if args.headless:
