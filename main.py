@@ -10,6 +10,11 @@ except Exception:
     print("matplotlib failed to import, running in headless mode")
     headless = True
 
+import argparse
+parser = argparse.ArgumentParser(description='Process fan controller options')
+parser.add_argument('--threshold', type=float, help="Fan activation temperature threshold")
+args = parser.parse_args()
+
 def fan_on():
     if fan.value == 0:
         print("Fan is on")
@@ -48,8 +53,6 @@ def update_chart():
     figure.canvas.draw()
     plt.pause(0.01)
 
-
-
 def init_chart():
     style.use("fivethirtyeight")
     figure = plt.figure()
@@ -68,7 +71,7 @@ cpu = CPUTemperature()
 fan_on = False
 
 # Temperature at which the fan is turned on
-TEMPERATURE_THRESHOLD = 68
+TEMPERATURE_THRESHOLD = args.threshold
 # Time between temperature checks when fan is off
 FAN_OFF_DELAY = 20
 # Time between temperature checks when fan is on
@@ -84,6 +87,9 @@ highest_temperature = 0
 # How much higher/lower the y-axis should show compared to max/min value
 Y_PADDING = 5
 MAX_ENTRIES = 10
+
+if not headless:
+    init_chart()
 
 while True:
     try:
