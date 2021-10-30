@@ -15,13 +15,13 @@ parser = argparse.ArgumentParser(description='Process fan controller options')
 parser.add_argument('--threshold', type=float, help="Fan activation temperature threshold")
 args = parser.parse_args()
 
-def fan_on():
+def activate_fan():
     if fan.value == 0:
         print("Fan is on")
         fan.on()
     sleep(FAN_ON_DELAY)
 
-def fan_off():
+def deactivate_fan():
     if fan.value == 1:
         print("Fan is off")
         fan.off()
@@ -97,6 +97,6 @@ while True:
         if not headless:
             update_chart()
 
-        fan_on() if cpu.temperature > TEMPERATURE_THRESHOLD else fan_off()
+        activate_fan() if cpu.temperature > TEMPERATURE_THRESHOLD else deactivate_fan()
     except KeyboardInterrupt:
         break
